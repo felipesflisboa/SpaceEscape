@@ -1,0 +1,60 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "WalkDown",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.06666666666666667,
+  "sample": 60,
+  "speed": 0.1,
+  "wrapMode": "2",
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "0c7154e4-a66f-43d2-ae36-f5a66ceeb4ad"
+            }
+          },
+          {
+            "frame": 0.016666666666666666,
+            "value": {
+              "__uuid__": "e4c43416-d600-4b89-8e2d-3c738c237cb0"
+            }
+          },
+          {
+            "frame": 0.03333333333333333,
+            "value": {
+              "__uuid__": "0c7154e4-a66f-43d2-ae36-f5a66ceeb4ad"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "e4c43416-d600-4b89-8e2d-3c738c237cb0"
+            }
+          }
+        ]
+      }
+    },
+    "props": {
+      "scaleX": [
+        {
+          "frame": 0,
+          "value": 1
+        },
+        {
+          "frame": 0.03333333333333333,
+          "value": 1,
+          "curve": "constant"
+        },
+        {
+          "frame": 0.05,
+          "value": -1
+        }
+      ]
+    }
+  },
+  "events": []
+}
