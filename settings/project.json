@@ -15,11 +15,18 @@
   "design-resolution-width": 320,
   "excluded-modules": [
     "LabelOutline",
+    "ParticleSystem",
     "Spine Skeleton",
+    "ProgressBar",
+    "ScrollBar",
+    "ScrollView",
+    "Toggle",
     "PageView",
     "PageViewIndicator",
+    "Slider",
     "VideoPlayer",
     "WebView",
+    "MotionStreak",
     "DragonBones",
     "StudioComponent",
     "RenderTexture",
@@ -37,6 +44,5 @@
     "width": 960
   },
   "use-customize-simulator": false,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }
