@@ -16,5 +16,5 @@ cc.Class {
     onConfirm: ->
         this._super()
         GameManager.clearStaticGameData()
-        cc.director.loadScene("StageA")
+        cc.director.loadScene("Stage01")
 }
