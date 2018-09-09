@@ -7,11 +7,6 @@ MAX_HP = 3
 Player = cc.Class {
     extends: require('Character')
 
-    statics:
-        hp: 0
-        clearStaticGameData: ->
-            this.hp = 0
-
     properties:
         cameraContainer: cc.Node
         damageSFX: cc.AudioSource
@@ -99,9 +94,9 @@ Player = cc.Class {
 
     explode: ->
         this.detachCamera()
-        GameManager.i().gameOver()
+        GameManager.i().onDeath()
         this._super()
-        this.node.active = false #TODO dead animation
+        this.node.active = false
 
     finish: () ->
 }

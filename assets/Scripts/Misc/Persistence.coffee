@@ -1,9 +1,7 @@
 BEST_SCORE_KEY = "Best"
 LAST_SCORE_KEY = "Last"
 
-getScore = (key) -> 
-    ret = cc.sys.localStorage.getItem(key)
-    return if ret? then ret else 0
+getScore = (key) -> cc.sys.localStorage.getItem(key) ? 0
 setScore = (key, score) -> cc.sys.localStorage.setItem(key, score.toString())
 
 module.exports.getBestScore = () -> getScore(BEST_SCORE_KEY)

@@ -17,9 +17,7 @@ cc.Class {
                     this._number = 1 if this._number==-1
                 return this._number
 
-    onLoad: ->
-        this.bgm = this.node.getComponent(cc.AudioSource)
-        this.fixTilemapTextureAlias(this.node.getComponentInChildren(cc.TiledMap))
+    onLoad: -> this.bgm = this.node.getComponent(cc.AudioSource)
 
     initialize: ->
         this.node.getComponentInChildren(require('TilemapColliderCreator')).create()
@@ -28,13 +26,4 @@ cc.Class {
 
     calculateStartPosition: ->
         return this.node.convertToNodeSpaceAR(this.startNode.convertToWorldSpaceAR(cc.p(0,-16)))
-
-    fixTilemapTextureAlias: (tilemap) ->
-        orly = tilemap.allLayers() #test
-        for layer in tilemap.allLayers()
-            # texture = layer.getTexture()
-            texture = layer._sgNode._texture
-            texture.setAliasTexParameters()
-            # layer.setTexture(texture)
-            layer._sgNode._texture = texture
 }

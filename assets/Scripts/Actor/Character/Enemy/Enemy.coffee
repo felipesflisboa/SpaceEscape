@@ -35,7 +35,7 @@ cc.Class {
     start: ->
         this._super()
         cc.Component.EventHandler.emitEvents(this.commandList, null)
-        cc.error(this.node.name+" directionArray won't sum 0!") if !this.directionsAreValid(this.directionArray)
+        cc.error("#{this.node.name} directionArray won't sum 0!") if !this.directionsAreValid(this.directionArray)
         this.initializeNextDestiny()
 
     update: (dt) ->
@@ -55,7 +55,7 @@ cc.Class {
         return sum.mag() == 0
 
     initializeNextDestiny: ->
-        this.index = MathUtil.repeat(this.index + 1, this.directionArray.length)
+        this.index = (this.index + 1) % this.directionArray.length
         this.destiny = this.node.position.add(this.directionArray[this.index].mul(16))
         this.direction = this.directionArray[this.index]
 

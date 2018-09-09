@@ -23,11 +23,7 @@ cc.Class {
         this.stageRemainingTimeLabel.string = Math.max(GameManager.i().StageRemainingSeconds,0)
 
         gameSeconds = GameManager.i().Seconds
-        #if gameSeconds >= 60*10 #remove
-        #    minutesString = "9"
-        #    secondsString = "59"
-        #else
         minutesString = FormatUtil.exactDigits(Math.floor(gameSeconds/60), 2)
         secondsString = FormatUtil.exactDigits(gameSeconds%60, 2)
-        this.timeLabel.string = minutesString+":"+secondsString
+        this.timeLabel.string = "#{minutesString}:#{secondsString}"
 }

@@ -8,7 +8,7 @@ cc.Class {
 
         GameEnded:
             visible: false
-            get: -> !CC_EDITOR && GameManager.startTime?
+            get: -> !CC_EDITOR && GameManager.data?
 
     onLoad: ->
         cc.view.enableAntiAlias(false)

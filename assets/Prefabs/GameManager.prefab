@@ -154,7 +154,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "GameOverSFX",
+    "_name": "DeathSFX",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -333,7 +333,7 @@
     "stageTimeEndingSFX": {
       "__id__": 9
     },
-    "gameOverSFX": {
+    "deathSFX": {
       "__id__": 6
     },
     "stageClearSFX": {

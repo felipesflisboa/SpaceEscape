@@ -27,17 +27,10 @@ cc.Class {
             this.tilemap.node.width/this.tileSize.width, 
             this.tilemap.node.height/this.tileSize.height
         )
-
-        cc.log("before ms="+new Date().getMilliseconds()+" date=") #remove
-        cc.log(new Date()) #remove
-
         for x in [0...(this.mapSizeInTiles.width)]
             for y in [0...(this.mapSizeInTiles.height)]
                 posInTiles = cc.p(x,y)
                 this.createColliderTile(posInTiles) if this.layer.getTileGIDAt(posInTiles)
-
-        cc.log("after ms="+new Date().getMilliseconds()+" date=") #remove
-        cc.log(new Date()) #remove
 
     createColliderTile: (posInTiles) ->
         tile = if this.colliderPrefab? then cc.instantiate(this.colliderPrefab) else this.buildColliderTile()

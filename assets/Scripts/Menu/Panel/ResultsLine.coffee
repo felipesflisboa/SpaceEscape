@@ -12,7 +12,7 @@ cc.Class {
     initialize: (labelString, multiplying, multiplier, sign) ->
         this.sign = sign
         this.typeLabel.string = labelString
-        this.typeLabel.string = "-"+this.typeLabel.string if !this.sign
+        this.typeLabel.string = "-#{this.typeLabel.string}" if !this.sign
         usedMultiplying = Math.min(999, multiplying)
         this.productValue = usedMultiplying * multiplier
         this.multiplyingLabel.string = FormatUtil.exactDigits(usedMultiplying, 3)

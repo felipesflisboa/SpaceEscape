@@ -52,7 +52,7 @@ cc.Class {
         directionArray = [directionArray] if !Array.isArray(directionArray)
         for dir in directionArray
             for i in [0...tileCount]
-                this.enemy.directionArray.push(dir) #TODO try better syntax
+                this.enemy.directionArray.push(dir)
 
     parseEvent: (data) ->
         return if !data then 1 else parseInt(data)
