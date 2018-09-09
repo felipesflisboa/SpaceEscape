@@ -2799,7 +2799,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 104
@@ -3092,7 +3092,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 116
@@ -3397,7 +3397,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 129
@@ -3690,7 +3690,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 141
@@ -3995,7 +3995,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 154
@@ -4288,7 +4288,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 166
@@ -4593,7 +4593,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 179
@@ -4886,7 +4886,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 191
@@ -5191,7 +5191,7 @@
     },
     "_enabled": true,
     "explosionPrefab": null,
-    "definedSpeed": 80,
+    "definedSpeed": 72,
     "commandList": [
       {
         "__id__": 204
