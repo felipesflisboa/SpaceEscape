@@ -26,5 +26,5 @@ cc.Class {
             this.animation.resume() if this.currentState.isPaused
             return
         this.currentState = this.animation.play(name)
-        this.currentState.speed = this.speed*speedMultiplier # TODO max/min
+        this.currentState.speed = this.character.speed*this.speedMultiplier # TODO max/min
 }
