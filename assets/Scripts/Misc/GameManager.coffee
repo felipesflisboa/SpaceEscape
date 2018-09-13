@@ -15,9 +15,10 @@ GameManager = cc.Class {
     
     properties:
         playerPrefab: cc.Prefab
-        hudPrefab: cc.Prefab
+        uiPrefab: cc.Prefab
         stageTimeEndingSFX: cc.AudioSource
         deathSFX: cc.AudioSource
+        pauseSFX: cc.AudioSource
         stageClearSFX: cc.AudioSource
         sceneNameArray: [cc.String]
         
@@ -42,16 +43,27 @@ GameManager = cc.Class {
             get: ->
                 return 0 if CC_EDITOR
                 return 40 - DateUtil.secondsInterval(this.stageStartTime, this.stageEndTime)
+        TimeEnding:
+            visible: false
+            get: -> !CC_EDITOR && this.StageRemainingSeconds <= 5
         TotalHits:
             visible: false
             get: -> if CC_EDITOR then 0 else GameManager.data.totalHits
             set: (value) -> GameManager.data.totalHits = value
+        CurrentAudio:
+            visible: false
+            get: -> 
+                return null if CC_EDITOR
+                return if this.TimeEnding then this.stageTimeEndingSFX else this.Stage.bgm
+        Paused:
+            visible: false
+            get: -> !CC_EDITOR && this.pauseStartTime?
         FinishingStage:
             visible: false
             get: -> !CC_EDITOR && this.stageEndTime?
         Occurring:
             visible: false
-            get: -> !CC_EDITOR && GameManager.data.startTime? && !GameManager.data.endTime?
+            get: -> !CC_EDITOR && GameManager.data.startTime? && !GameManager.data.endTime? && !this.Paused
         Busy:
             visible: false
             get: -> !CC_EDITOR && (!this.Occurring || this.FinishingStage)
@@ -64,10 +76,12 @@ GameManager = cc.Class {
 
     start: ->
         this.player = cc.instantiate(this.playerPrefab).getComponent(require('Player'))
-        this.hud = cc.instantiate(this.hudPrefab).getComponent(require('HUD'))
-        this.Canvas.node.addChild(this.hud.node)
+        this.ui = cc.instantiate(this.uiPrefab).getComponent(require('GameUI'))
+        this.Canvas.node.addChild(this.ui.node)
         this.Stage.initialize()
         this.initializeCamera()
+        this.pauseStartTime = null
+        this.lastFramePausePress = false
         if !GameManager.data?
             GameManager.data = new GameData(this.Stage.Number)
             GameManager.data.initialize()
@@ -86,7 +100,7 @@ GameManager = cc.Class {
         cc.director.getPhysicsManager().attachDebugDrawToCamera(cc.Camera.main)
 
     startStage: ->
-        this.hud.enableRefresh()
+        this.ui.hud.enableRefresh()
         this.schedule(this.stageTimeOverCheck, 0.2)
 
     initializeCamera: ->
@@ -94,10 +108,36 @@ GameManager = cc.Class {
         this.player.attachCamera(camera)
         camera.addTarget(this.Stage.node)
 
+    update: -> this.updateInput()
+
+    updateInput: ->
+        if Input.pause
+            this.togglePause() if !this.lastFramePausePress
+        if Input.escape
+            this.exit() if this.Paused
+        this.lastFramePausePress = Input.pause
+
     onDebugKeyPress: (event) -> this.stageClear() if event.keyCode==cc.KEY.e
 
+    togglePause: ->
+        cc.log("pause press")
+        return if this.Seconds < 1 # avoiding accidental click
+        if this.Paused
+            differenceMilliseconds = Date.now() - this.pauseStartTime
+            this.pauseStartTime = null
+            this.stageStartTime = new Date(this.stageStartTime.getTime()+differenceMilliseconds)
+            GameManager.data.startTime = new Date(GameManager.data.startTime.getTime()+differenceMilliseconds)
+            this.CurrentAudio.play() if !this.CurrentAudio.isPlaying
+            this.stageTimeOverCheck() # For avoid skipping the check
+        else
+            this.pauseStartTime = new Date()
+            this.CurrentAudio.stop() if this.CurrentAudio.isPlaying
+        this.pauseSFX.stop() if this.pauseSFX.isPlaying
+        this.pauseSFX.play()
+        this.ui.pauseMask.active = this.Paused
+
     stageTimeOverCheck: ->
-        return if this.Busy || this.StageRemainingSeconds > 5
+        return if this.Busy || !this.TimeEnding
         if !this.stageTimeEndingSFX.isPlaying
             this.Stage.bgm.stop()
             this.stageTimeEndingSFX.play()
@@ -129,6 +169,8 @@ GameManager = cc.Class {
     gameClear: ->
         GameManager.data.endTime = new Date()
         cc.director.loadScene("Ending")
+
+    exit: -> cc.director.loadScene("Menu")
 
     onDestroy: ->
         Input.unregister()
