@@ -16,14 +16,15 @@ GameData = cc.Class {
     static:
         generateDebugInstance: ->
             ret = new GameData()
-            ret.initialize(1)
+            ret.initialize()
+            ret.lastStageNumber = 1
             ret.endTime = new Date()
             ret.totalHits = 2
             return ret
 
-    initialize: (lastStageNumber) ->
+    initialize: ->
         this.startTime = new Date()
         this.endTime = null
-        this.lastStageNumber = lastStageNumber
+        this.lastStageNumber = 0
         this.totalHits = 0
 }

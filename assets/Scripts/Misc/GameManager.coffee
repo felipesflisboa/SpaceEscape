@@ -83,8 +83,9 @@ GameManager = cc.Class {
         this.pauseStartTime = null
         this.lastFramePausePress = false
         if !GameManager.data?
-            GameManager.data = new GameData(this.Stage.Number)
+            GameManager.data = new GameData()
             GameManager.data.initialize()
+        GameManager.data.lastStageNumber = this.Stage.Number
         this.stageStartTime ?= new Date()
         # Wait a frame for running all start functions before game start.
         setTimeout(this.startStage.bind(this), 1)
