@@ -45,9 +45,9 @@ cc.Class {
     initializeLineArray: ->
         this.Data = GameData.generateDebugInstance() if this.DebugTesting
         this.lineArray = []
-        this.lineArray.push(this.createLine("Clear", this.Data.lastStageNumber, 99, true))
+        this.lineArray.push(this.createLine("Clear", this.Data.lastStageNumber, 999, true))
         this.lineArray.push(this.createLine("Hits", this.Data.totalHits, 10, false))
-        this.lineArray.push(this.createLine("Time", this.Data.Seconds(), 1, false))
+        this.lineArray.push(this.createLine("Time", this.Data.Seconds, 1, false))
 
     createLine: (name, base, multiplier, sign) ->
         line = cc.instantiate(this.linePrefab).getComponent(ResultsLine)
