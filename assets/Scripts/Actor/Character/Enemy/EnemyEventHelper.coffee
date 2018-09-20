@@ -10,17 +10,12 @@ cc.Class {
     editor:
         requireComponent: Enemy
 
-    onLoad: ->
-        this.enemy = this.node.getComponent(Enemy)
+    onLoad: -> this.enemy = this.node.getComponent(Enemy)
 
-    up: (event, customEventData) ->
-        this.addTileStep(Direction.UP, this.parseEvent(customEventData))
-    left: (event, customEventData) ->
-        this.addTileStep(Direction.LEFT, this.parseEvent(customEventData))
-    down: (event, customEventData) ->
-        this.addTileStep(Direction.DOWN, this.parseEvent(customEventData))
-    right: (event, customEventData) ->
-        this.addTileStep(Direction.RIGHT, this.parseEvent(customEventData))
+    up: (event, customEventData) -> this.addTileStep(Direction.UP, this.parseEvent(customEventData))
+    left: (event, customEventData) -> this.addTileStep(Direction.LEFT, this.parseEvent(customEventData))
+    down: (event, customEventData) -> this.addTileStep(Direction.DOWN, this.parseEvent(customEventData))
+    right: (event, customEventData) -> this.addTileStep(Direction.RIGHT, this.parseEvent(customEventData))
             
     circleUpRight: (event, customEventData) ->
         directionArray = [Direction.UP, Direction.RIGHT, Direction.DOWN, Direction.LEFT]
@@ -51,9 +46,8 @@ cc.Class {
     addTileStep: (directionArray, tileCount) ->
         directionArray = [directionArray] if !Array.isArray(directionArray)
         for dir in directionArray
-            for i in [0...tileCount]
+            for [0...tileCount]
                 this.enemy.directionArray.push(dir)
 
-    parseEvent: (data) ->
-        return if !data then 1 else parseInt(data)
+    parseEvent: (data) -> if !data then 1 else parseInt(data)
 }

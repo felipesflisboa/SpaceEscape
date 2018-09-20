@@ -69,8 +69,7 @@ GameManager = cc.Class {
             get: -> !CC_EDITOR && (!this.Occurring || this.FinishingStage)
 
     onLoad: ->
-        Input.register()
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onDebugKeyPress, this) if CC_DEBUG
+        this.registerInput()
         cc.director.getPhysicsManager().enabled = true
         cc.view.enableAntiAlias(false)
 
@@ -81,7 +80,6 @@ GameManager = cc.Class {
         this.Stage.initialize()
         this.initializeCamera()
         this.pauseStartTime = null
-        this.lastFramePausePress = false
         if !GameManager.data?
             GameManager.data = new GameData()
             GameManager.data.initialize()
@@ -89,6 +87,12 @@ GameManager = cc.Class {
         this.stageStartTime ?= new Date()
         # Wait a frame for running all start functions before game start.
         setTimeout(this.startStage.bind(this), 1)
+
+    registerInput: ->
+        Input.register()
+        Input.registerCallback(this.togglePause.bind(this), cc.KEY.space, cc.KEY.enter)
+        Input.registerCallback(this.onEscapeKeyPress.bind(this), cc.KEY.escape)
+        Input.registerCallback(this.onDebugKeyPress.bind(this), cc.KEY.e) if CC_DEBUG
 
     enablePhysicsDebug: ->
         cc.director.getPhysicsManager().debugDrawFlags = (    
@@ -109,19 +113,7 @@ GameManager = cc.Class {
         this.player.attachCamera(camera)
         camera.addTarget(this.Stage.node)
 
-    update: -> this.updateInput()
-
-    updateInput: ->
-        if Input.pause
-            this.togglePause() if !this.lastFramePausePress
-        if Input.escape
-            this.exit() if this.Paused
-        this.lastFramePausePress = Input.pause
-
-    onDebugKeyPress: (event) -> this.stageClear() if event.keyCode==cc.KEY.e
-
     togglePause: ->
-        cc.log("pause press")
         return if this.Seconds < 1 # avoiding accidental click
         if this.Paused
             differenceMilliseconds = Date.now() - this.pauseStartTime
@@ -136,6 +128,10 @@ GameManager = cc.Class {
         this.pauseSFX.stop() if this.pauseSFX.isPlaying
         this.pauseSFX.play()
         this.ui.pauseMask.active = this.Paused
+
+    onEscapeKeyPress: -> this.exit() if this.Paused
+
+    onDebugKeyPress: (event) -> this.stageClear() if event.keyCode==cc.KEY.e
 
     stageTimeOverCheck: ->
         return if this.Busy || !this.TimeEnding

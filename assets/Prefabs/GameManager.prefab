@@ -157,7 +157,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "StageTimeEndingSFX",
+    "_name": "StageTimeEndingBGM",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
